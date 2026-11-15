@@ -1,4 +1,6 @@
-# homebridge-eufy-robovac-matter
+# @stormychel/homebridge-eufy-robovac-matter
+
+> **Fork.** This is a fork of [homebridge-eufy-robovac-matter](https://www.npmjs.com/package/homebridge-eufy-robovac-matter) 5.1.0 by Sebastian van Vliet, whose source repository is no longer public. It is built from the compiled npm package and fixes the empty `modeTags` that made Matter registration fail (see [CHANGELOG-FORK.md](CHANGELOG-FORK.md)). Install with `npm install -g @stormychel/homebridge-eufy-robovac-matter`; also confirmed on the RoboVac C20 (T2280).
 
 > **⚠️ Experimental — Research Phase**
 > This project is currently in an active research and development phase. APIs, configuration options, and behaviour may change without notice between versions. Use at your own risk. See [Disclaimer](#disclaimer) for details.

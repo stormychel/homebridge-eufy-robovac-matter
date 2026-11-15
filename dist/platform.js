@@ -51,7 +51,7 @@ const cloud_types_1 = require("./eufy/cloud-types");
 const mappers_1 = require("./matter/mappers");
 const clusters_1 = require("./matter/clusters");
 const device_session_1 = require("./device-session");
-const PLUGIN_NAME = 'homebridge-eufy-robovac-matter';
+const PLUGIN_NAME = '@stormychel/homebridge-eufy-robovac-matter';
 const PLATFORM_NAME = 'EufyRobovacMatter';
 /** Stable model tag used to discriminate switch siblings from main vacuum accessories. */
 const SWITCH_MODEL_NAME = 'RoboVac trigger';

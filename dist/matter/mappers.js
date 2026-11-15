@@ -158,7 +158,7 @@ class MatterMappers {
         {
             label: 'Returning Home',
             mode: MatterRvcRunMode.RETURNING_HOME,
-            modeTags: [],
+            modeTags: [{ value: 16386 }], // Mapping tag; empty modeTags fails Matter validation (1..8)
         },
     ];
     static getSupportedRunModes() {
@@ -240,7 +240,7 @@ class MatterMappers {
         {
             label: 'Spot Clean',
             mode: MatterRvcCleanMode.SPOT_CLEAN,
-            modeTags: [],
+            modeTags: [{ value: MatterRvcCleanModeTag.VACUUM }], // empty modeTags fails Matter validation (1..8)
         },
         // Cleaning-profile entries ("Suction Power" in Apple Home). Tags are the
         // common-namespace power tags so Apple Home groups them into the secondary

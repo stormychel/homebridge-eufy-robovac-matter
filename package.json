@@ -1,42 +1,30 @@
 {
-  "name": "homebridge-eufy-robovac-matter",
-  "version": "5.1.0",
+  "name": "@stormychel/homebridge-eufy-robovac-matter",
+  "version": "5.1.1",
   "description": "Matter-native Homebridge v2 plugin for Eufy RoboVac devices",
   "displayName": "Eufy RoboVac Matter",
   "license": "Apache-2.0",
   "author": "Sebastian van Vliet",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SyntaxThaw/homebridge-matter-eufy-mqtt.git"
+    "url": "git+https://github.com/stormychel/homebridge-eufy-robovac-matter.git"
   },
   "bugs": {
-    "url": "https://github.com/SyntaxThaw/homebridge-matter-eufy-mqtt/issues"
+    "url": "https://github.com/stormychel/homebridge-eufy-robovac-matter/issues"
   },
-  "homepage": "https://github.com/SyntaxThaw/homebridge-matter-eufy-mqtt#readme",
+  "homepage": "https://github.com/stormychel/homebridge-eufy-robovac-matter#readme",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public",
-    "provenance": true,
     "registry": "https://registry.npmjs.org/"
-  },
-  "scripts": {
-    "build": "rm -rf dist && tsc && mkdir -p dist/eufy/proto/cloud && cp src/eufy/proto/cloud/*.proto dist/eufy/proto/cloud/ && bash scripts/build-ui.sh",
-    "watch": "tsc -w",
-    "lint": "eslint \"src/**/*.ts\"",
-    "test": "vitest run --coverage",
-    "conflict:check": "bash -lc \"if rg -n '<<<<<<<|=======|>>>>>>>' src dist; then echo 'Conflict markers found'; exit 1; else echo 'No conflict markers found'; fi\"",
-    "conflict:resolve:ours": "./scripts/resolve-matter-conflicts.sh ours",
-    "conflict:resolve:theirs": "./scripts/resolve-matter-conflicts.sh theirs",
-    "vitest": "vitest run",
-    "type-check": "tsc --noEmit",
-    "coverage": "vitest run --coverage",
-    "prepack": "npm run build",
-    "prepare": "npm run build"
   },
   "files": [
     "dist",
     "config.schema.json",
-    "homebridge-ui"
+    "homebridge-ui",
+    "NOTICE",
+    "LICENSE",
+    "CHANGELOG-FORK.md"
   ],
   "keywords": [
     "homebridge",
@@ -57,27 +45,5 @@
     "protobufjs": "^8.2.0",
     "qrcode": "^1.5.4",
     "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/exec": "^7.1.0",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.8",
-    "@semantic-release/npm": "^13.1.5",
-    "@semantic-release/release-notes-generator": "^14.1.1",
-    "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "@vitest/coverage-v8": "^4.1.6",
-    "aedes": "^1.0.2",
-    "conventional-changelog-conventionalcommits": "^9.3.1",
-    "eslint": "^10.4.0",
-    "globals": "^17.6.0",
-    "homebridge": "^2.0.0-beta.0",
-    "semantic-release": "^25.0.3",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.6"
   }
 }

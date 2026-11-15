@@ -1,0 +1,7 @@
+@stormychel/homebridge-eufy-robovac-matter
+Fork of homebridge-eufy-robovac-matter 5.1.0 by Sebastian van Vliet
+(https://www.npmjs.com/package/homebridge-eufy-robovac-matter), licensed under
+the Apache License 2.0. The original source repository is no longer public;
+this fork is built from the compiled package published on npm.
+
+Changes from 5.1.0 are listed in CHANGELOG-FORK.md.
