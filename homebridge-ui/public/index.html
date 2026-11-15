@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Eufy RoboVac · Matter — plugin config</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="vendor/bootstrap-icons.css"/>
+  <script>
+    // Default to dark; honour system preference if available.
+    (function () {
+      var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = dark ? 'dark' : 'dark';
+    }());
+
+    // Homebridge UI X wraps this page and sets `<body style="display:none">`
+    // until it receives a `ready` postMessage from `assets/plugin-ui-utils/ui.js`.
+    // If that handshake stalls for any reason (slow load, missing origin param,
+    // child-process server.js crash), the iframe stays at 0 height and the
+    // user sees an empty modal. This fallback unhides the body after 3 s so
+    // the UI is at least diagnosable instead of a black hole.
+    setTimeout(function () {
+      try {
+        if (document.body && document.body.style.display === 'none') {
+          console.warn('[eufy-ui] ready handshake timed out — forcing body visible');
+          document.body.style.display = 'block';
+        }
+      } catch (_) { /* nothing to do */ }
+    }, 3000);
+  </script>
+</head>
+<body>
+  <div id="root">
+    <div class="boot">
+      <div class="boot-spinner"></div>
+      <div class="boot-label">Loading plugin UI…</div>
+    </div>
+  </div>
+
+  <!-- Standalone-preview fallback: installs window.homebridge stub when not in Homebridge UI X. -->
+  <script src="mock.js"></script>
+
+  <!-- React + ReactDOM (UMD production builds, ~140 KB total, shipped locally). -->
+  <script src="vendor/react.production.min.js"></script>
+  <script src="vendor/react-dom.production.min.js"></script>
+
+  <!-- JSX precompiled to plain JS via esbuild (see scripts/build-ui.sh).
+       No Babel-standalone — that 5 MB CDN dependency caused the iframe
+       handshake to time out and the body stayed display:none → black page. -->
+  <script src="compiled/components.js"></script>
+  <script src="compiled/tabs.js"></script>
+  <script src="compiled/app.js"></script>
+</body>
+</html>

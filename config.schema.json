@@ -1,0 +1,86 @@
+{
+  "pluginAlias": "EufyRobovacMatter",
+  "pluginType": "platform",
+  "singular": true,
+  "customUi": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "username": {
+        "title": "Eufy Username",
+        "type": "string",
+        "required": true,
+        "maxLength": 256
+      },
+      "password": {
+        "title": "Eufy Password",
+        "type": "string",
+        "required": true,
+        "maxLength": 256
+      },
+      "disableMatterStatePush": {
+        "title": "Disable Matter state push updates (troubleshooting)",
+        "type": "boolean",
+        "default": false
+      },
+      "mqttReconnectMaxDelay": {
+        "title": "MQTT reconnect max delay (ms)",
+        "type": "integer",
+        "default": 30000,
+        "minimum": 1000
+      },
+      "defaultMode": {
+        "title": "Default cleaning mode",
+        "type": "string",
+        "default": "AUTO",
+        "oneOf": [
+          { "title": "Auto", "enum": ["AUTO"] },
+          { "title": "Vacuum Only", "enum": ["VACUUM_ONLY"] },
+          { "title": "Mop Only", "enum": ["MOP_ONLY"] },
+          { "title": "Vacuum + Mop", "enum": ["VACUUM_AND_MOP"] }
+        ]
+      },
+      "defaultSuction": {
+        "title": "Default suction level",
+        "type": "integer",
+        "default": 2,
+        "minimum": 1,
+        "maximum": 5
+      },
+      "rooms": {
+        "title": "Room selection override",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string", "title": "Room ID" },
+            "name": { "type": "string", "title": "Room Name" }
+          },
+          "required": ["id", "name"]
+        }
+      },
+      "cleanProfiles": {
+        "title": "Cleaning profile overrides",
+        "description": "Override the bundled suction / mop / route / work-mode for each Apple Home Suction Power profile. Omit a field to use the plugin default.",
+        "type": "object",
+        "properties": {
+          "QUICK":      { "$ref": "#/definitions/profileOverride" },
+          "QUIET":      { "$ref": "#/definitions/profileOverride" },
+          "LOW_POWER":  { "$ref": "#/definitions/profileOverride" },
+          "DEEP_CLEAN": { "$ref": "#/definitions/profileOverride" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "profileOverride": {
+      "type": "object",
+      "properties": {
+        "fanSuction":  { "type": "integer", "minimum": 0, "maximum": 4, "title": "Suction (0=Quiet … 4=Max+)" },
+        "mopLevel":    { "type": "integer", "minimum": 0, "maximum": 2, "title": "Mop level (0=Low … 2=High)" },
+        "cleanExtent": { "type": "integer", "minimum": 0, "maximum": 2, "title": "Route (0=Normal, 1=Narrow, 2=Quick)" },
+        "cleanType":   { "type": "integer", "minimum": 0, "maximum": 3, "title": "Work mode (0=Sweep, 1=Mop, 2=Sweep+Mop, 3=Sweep→Mop)" }
+      }
+    }
+  }
+}

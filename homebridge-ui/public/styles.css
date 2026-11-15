@@ -1,0 +1,99 @@
+/* ============================================================
+   Eufy RoboVac Matter — design tokens + minimal reset
+   Self-contained so the file can drop into the plugin repo
+   without requiring colors_and_type.css from the parent system.
+   ============================================================ */
+
+:root, [data-theme="dark"] {
+  --bg-0:#0F1216; --bg-1:#171B21; --bg-2:#1E232B; --bg-3:#252B34;
+  --fg-1:#E8ECF1; --fg-2:#C2C9D3; --fg-3:#98A1AD; --fg-4:#7C8694;
+  --border-1:#272D36; --border-2:#313945;
+  --brand-100:#B6F1F4; --brand-300:#4FD3DA; --brand-500:#00B6C2; --brand-600:#0098A3; --brand-700:#007D86;
+  --success-bg: color-mix(in oklab, #1F9D55 18%, var(--bg-1));
+  --success-fg:#58D89A; --success-500:#1F9D55;
+  --warning-bg: color-mix(in oklab, #C77400 22%, var(--bg-1));
+  --warning-fg:#F0B354; --warning-500:#C77400;
+  --danger-bg:  color-mix(in oklab, #D24545 20%, var(--bg-1));
+  --danger-fg:#F58A8A;  --danger-500:#D24545;
+  --info-bg:    color-mix(in oklab, #1F6FEB 22%, var(--bg-1));
+  --info-fg:#7FB2FF;    --info-500:#1F6FEB;
+  --wear-0:#1F9D55; --wear-1:#B8B233; --wear-2:#C77400; --wear-3:#D24545;
+  --r-1:6px; --r-2:10px; --r-3:14px; --r-pill:999px;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
+  --ease:cubic-bezier(.2,.7,.3,1); --dur-1:120ms;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+}
+
+[data-theme="light"] {
+  --bg-0:#F6F7F9; --bg-1:#FFFFFF; --bg-2:#F2F4F7; --bg-3:#ECEFF3;
+  --fg-1:#0B1220; --fg-2:#303744; --fg-3:#4B5563; --fg-4:#6B7280;
+  --border-1:#E4E7EC; --border-2:#D6DAE0;
+  --success-bg:#E6F7EE; --warning-bg:#FDF2DE; --danger-bg:#FBE5E5; --info-bg:#E5EFFC;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg-0);
+  color: var(--fg-2);
+  font: 14px/1.45 var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  /* Homebridge UI X resizes the host iframe to body.scrollHeight. The boot
+     fallback uses position:fixed (doesn't contribute to scrollHeight), so
+     without min-height the iframe collapses to ~0 px before React renders
+     — the modal then looks empty / black. */
+  min-height: 480px;
+}
+button { font-family: inherit; }
+a { color: var(--brand-300); text-decoration: none; }
+a:hover { color: var(--brand-100); }
+
+input:focus, button:focus-visible {
+  outline: none;
+  border-color: var(--brand-500) !important;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-500) 30%, transparent);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* boot fallback shown until React renders */
+.boot {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  align-items: center; justify-content: center;
+  background: var(--bg-0);
+  color: var(--fg-3);
+  font: 500 13px var(--font-sans);
+}
+.boot-spinner {
+  width: 22px; height: 22px;
+  border: 2px solid var(--border-2);
+  border-top-color: var(--brand-500);
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.boot-label { letter-spacing: .01em; }
+
+/* toast (custom, doesn't depend on Homebridge UI X) */
+.toast-host {
+  position: fixed; top: 16px; right: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+  z-index: 1000; pointer-events: none;
+}
+.toast {
+  padding: 10px 14px; border-radius: 8px;
+  background: var(--bg-1); border: 1px solid var(--border-1);
+  color: var(--fg-1); font: 500 13px var(--font-sans);
+  display: inline-flex; align-items: center; gap: 8px;
+  pointer-events: auto;
+  animation: t-in 160ms var(--ease);
+}
+.toast.success { border-color: color-mix(in oklab, var(--success-500) 40%, var(--border-1)); }
+.toast.error   { border-color: color-mix(in oklab, var(--danger-500)  40%, var(--border-1)); }
+.toast.info    { border-color: color-mix(in oklab, var(--info-500)    40%, var(--border-1)); }
+@keyframes t-in { from { opacity: 0; transform: translateY(-4px); } }

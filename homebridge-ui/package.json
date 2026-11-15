@@ -1,0 +1,6 @@
+{
+  "name": "homebridge-eufy-robovac-matter-ui",
+  "private": true,
+  "type": "module",
+  "description": "Custom UI server for the Eufy RoboVac Matter plugin. ESM-scoped so we can import @homebridge/plugin-ui-utils@2.x (ESM-only) without flipping the root package.json (which still ships CommonJS dist)."
+}
